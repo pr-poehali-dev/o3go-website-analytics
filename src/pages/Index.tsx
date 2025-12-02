@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import Icon from "@/components/ui/icon";
 import { useState, useEffect } from "react";
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
-import { Bar, BarChart, Cell, Pie, PieChart, ResponsiveContainer } from "recharts";
+import { Bar, BarChart, Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
 
 const metricsData = [
   { label: "Отправлено WA", value: 2730289, icon: "MessageCircle", color: "#8B5CF6" },
@@ -138,24 +138,26 @@ const Index = () => {
               <Icon name="PieChart" size={28} className="text-[#8B5CF6]" />
               Распределение WA
             </h2>
-            <ResponsiveContainer width="100%" height={300}>
-              <PieChart>
-                <Pie
-                  data={pieChartData}
-                  cx="50%"
-                  cy="50%"
-                  labelLine={false}
-                  label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
-                  outerRadius={100}
-                  dataKey="value"
-                >
-                  {pieChartData.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={entry.fill} />
-                  ))}
-                </Pie>
-                <ChartTooltip content={<ChartTooltipContent />} />
-              </PieChart>
-            </ResponsiveContainer>
+            <ChartContainer config={{}} className="h-[300px]">
+              <ResponsiveContainer width="100%" height={300}>
+                <PieChart>
+                  <Pie
+                    data={pieChartData}
+                    cx="50%"
+                    cy="50%"
+                    labelLine={false}
+                    label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
+                    outerRadius={100}
+                    dataKey="value"
+                  >
+                    {pieChartData.map((entry, index) => (
+                      <Cell key={`cell-${index}`} fill={entry.fill} />
+                    ))}
+                  </Pie>
+                  <Tooltip />
+                </PieChart>
+              </ResponsiveContainer>
+            </ChartContainer>
           </Card>
 
           <Card className="p-6 bg-gradient-to-br from-[#1e1e2f] to-[#2a2a3e] border-[#3a3a4e] animate-scale-in" style={{ animationDelay: '100ms' }}>
@@ -163,16 +165,18 @@ const Index = () => {
               <Icon name="BarChart3" size={28} className="text-[#D946EF]" />
               Клики по регионам
             </h2>
-            <ResponsiveContainer width="100%" height={300}>
-              <BarChart data={clicksData}>
-                <Bar dataKey="value" radius={[8, 8, 0, 0]}>
-                  {clicksData.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={entry.fill} />
-                  ))}
-                </Bar>
-                <ChartTooltip content={<ChartTooltipContent />} />
-              </BarChart>
-            </ResponsiveContainer>
+            <ChartContainer config={{}} className="h-[300px]">
+              <ResponsiveContainer width="100%" height={300}>
+                <BarChart data={clicksData}>
+                  <Bar dataKey="value" radius={[8, 8, 0, 0]}>
+                    {clicksData.map((entry, index) => (
+                      <Cell key={`cell-${index}`} fill={entry.fill} />
+                    ))}
+                  </Bar>
+                  <Tooltip />
+                </BarChart>
+              </ResponsiveContainer>
+            </ChartContainer>
           </Card>
         </div>
 

@@ -5,15 +5,21 @@ import { useState, useEffect } from "react";
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
 import { Bar, BarChart, Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
 
-const metricsData = [
+const waMetrics = [
   { label: "Отправлено WA", value: 2730289, icon: "MessageCircle", color: "#8B5CF6" },
   { label: "WA piter", value: 1125052, icon: "MapPin", color: "#D946EF" },
   { label: "WA Volga", value: 1605237, icon: "Waves", color: "#0EA5E9" },
-  { label: "Отдали WA в ТГ", value: 329268, icon: "Send", color: "#F97316" },
   { label: "WA Dann", value: 10377, icon: "Zap", color: "#F97316" },
+  { label: "Отдали WA в ТГ", value: 329268, icon: "Send", color: "#0EA5E9" },
+];
+
+const clicksMetrics = [
   { label: "Сделано кликов", value: 263149, icon: "MousePointerClick", color: "#D946EF" },
   { label: "Ру клик", value: 162223, icon: "Flag", color: "#0EA5E9" },
   { label: "Ино клик", value: 100926, icon: "Globe", color: "#F97316" },
+];
+
+const otherMetrics = [
   { label: "ИМО", value: 100239, icon: "MessageSquare", color: "#8B5CF6" },
   { label: "Вайбер", value: 78243, icon: "Phone", color: "#D946EF" },
   { label: "Проектов WA", value: 50, icon: "Briefcase", color: "#0EA5E9" },
@@ -62,9 +68,10 @@ const Index = () => {
   };
 
   const handleExportExcel = () => {
+    const allMetrics = [...waMetrics, ...clicksMetrics, ...otherMetrics];
     const csvContent = [
       ['Метрика', 'Значение'],
-      ...metricsData.map(m => [m.label, m.value]),
+      ...allMetrics.map(m => [m.label, m.value]),
       ['', ''],
       ['Период', '22.08 - 29.11'],
       ['Депозиты', '1878'],
@@ -106,8 +113,8 @@ const Index = () => {
           </div>
         </header>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {metricsData.map((metric, index) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
+          {waMetrics.map((metric, index) => (
             <Card 
               key={metric.label}
               className="p-6 bg-gradient-to-br from-[#1e1e2f] to-[#2a2a3e] border-[#3a3a4e] hover:border-[#8B5CF6] transition-all duration-300 hover:scale-105 animate-fade-in backdrop-blur-lg"
@@ -132,52 +139,102 @@ const Index = () => {
           ))}
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <Card className="p-6 bg-gradient-to-br from-[#1e1e2f] to-[#2a2a3e] border-[#3a3a4e] animate-scale-in">
-            <h2 className="text-2xl font-bold mb-6 text-white flex items-center gap-2">
-              <Icon name="PieChart" size={28} className="text-[#8B5CF6]" />
-              Распределение WA
-            </h2>
-            <ChartContainer config={{}} className="h-[300px]">
-              <ResponsiveContainer width="100%" height={300}>
-                <PieChart>
-                  <Pie
-                    data={pieChartData}
-                    cx="50%"
-                    cy="50%"
-                    labelLine={false}
-                    label={({ name, percent }) => `${name} ${(percent * 100).toFixed(1)}%`}
-                    outerRadius={100}
-                    dataKey="value"
-                  >
-                    {pieChartData.map((entry, index) => (
-                      <Cell key={`cell-${index}`} fill={entry.fill} />
-                    ))}
-                  </Pie>
-                  <Tooltip />
-                </PieChart>
-              </ResponsiveContainer>
-            </ChartContainer>
-          </Card>
+        <Card className="p-6 bg-gradient-to-br from-[#1e1e2f] to-[#2a2a3e] border-[#3a3a4e] animate-scale-in">
+          <h2 className="text-2xl font-bold mb-6 text-white flex items-center gap-2">
+            <Icon name="PieChart" size={28} className="text-[#8B5CF6]" />
+            Распределение WA
+          </h2>
+          <ChartContainer config={{}} className="h-[300px]">
+            <ResponsiveContainer width="100%" height={300}>
+              <PieChart>
+                <Pie
+                  data={pieChartData}
+                  cx="50%"
+                  cy="50%"
+                  labelLine={false}
+                  label={({ name, percent }) => `${name} ${(percent * 100).toFixed(1)}%`}
+                  outerRadius={100}
+                  dataKey="value"
+                >
+                  {pieChartData.map((entry, index) => (
+                    <Cell key={`cell-${index}`} fill={entry.fill} />
+                  ))}
+                </Pie>
+                <Tooltip />
+              </PieChart>
+            </ResponsiveContainer>
+          </ChartContainer>
+        </Card>
 
-          <Card className="p-6 bg-gradient-to-br from-[#1e1e2f] to-[#2a2a3e] border-[#3a3a4e] animate-scale-in" style={{ animationDelay: '100ms' }}>
-            <h2 className="text-2xl font-bold mb-6 text-white flex items-center gap-2">
-              <Icon name="BarChart3" size={28} className="text-[#D946EF]" />
-              Клики по регионам
-            </h2>
-            <ChartContainer config={{}} className="h-[300px]">
-              <ResponsiveContainer width="100%" height={300}>
-                <BarChart data={clicksData}>
-                  <Bar dataKey="value" radius={[8, 8, 0, 0]}>
-                    {clicksData.map((entry, index) => (
-                      <Cell key={`cell-${index}`} fill={entry.fill} />
-                    ))}
-                  </Bar>
-                  <Tooltip />
-                </BarChart>
-              </ResponsiveContainer>
-            </ChartContainer>
-          </Card>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {clicksMetrics.map((metric, index) => (
+            <Card 
+              key={metric.label}
+              className="p-6 bg-gradient-to-br from-[#1e1e2f] to-[#2a2a3e] border-[#3a3a4e] hover:border-[#8B5CF6] transition-all duration-300 hover:scale-105 animate-fade-in backdrop-blur-lg"
+              style={{ animationDelay: `${index * 50}ms` }}
+            >
+              <div className="flex items-start justify-between mb-4">
+                <div 
+                  className="p-3 rounded-xl"
+                  style={{ 
+                    background: `linear-gradient(135deg, ${metric.color}20, ${metric.color}40)`,
+                    boxShadow: `0 0 20px ${metric.color}30`
+                  }}
+                >
+                  <Icon name={metric.icon} size={24} style={{ color: metric.color }} />
+                </div>
+              </div>
+              <h3 className="text-sm text-gray-400 mb-2">{metric.label}</h3>
+              <p className="text-3xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+                <AnimatedCounter end={metric.value} />
+              </p>
+            </Card>
+          ))}
+        </div>
+
+        <Card className="p-6 bg-gradient-to-br from-[#1e1e2f] to-[#2a2a3e] border-[#3a3a4e] animate-scale-in">
+          <h2 className="text-2xl font-bold mb-6 text-white flex items-center gap-2">
+            <Icon name="BarChart3" size={28} className="text-[#D946EF]" />
+            Клики по регионам
+          </h2>
+          <ChartContainer config={{}} className="h-[300px]">
+            <ResponsiveContainer width="100%" height={300}>
+              <BarChart data={clicksData}>
+                <Bar dataKey="value" radius={[8, 8, 0, 0]}>
+                  {clicksData.map((entry, index) => (
+                    <Cell key={`cell-${index}`} fill={entry.fill} />
+                  ))}
+                </Bar>
+                <Tooltip />
+              </BarChart>
+            </ResponsiveContainer>
+          </ChartContainer>
+        </Card>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {otherMetrics.map((metric, index) => (
+            <Card 
+              key={metric.label}
+              className="p-6 bg-gradient-to-br from-[#1e1e2f] to-[#2a2a3e] border-[#3a3a4e] hover:border-[#8B5CF6] transition-all duration-300 hover:scale-105 animate-fade-in backdrop-blur-lg"
+              style={{ animationDelay: `${index * 50}ms` }}
+            >
+              <div className="flex items-start justify-between mb-4">
+                <div 
+                  className="p-3 rounded-xl"
+                  style={{ 
+                    background: `linear-gradient(135deg, ${metric.color}20, ${metric.color}40)`,
+                    boxShadow: `0 0 20px ${metric.color}30`
+                  }}
+                >
+                  <Icon name={metric.icon} size={24} style={{ color: metric.color }} />
+                </div>
+              </div>
+              <h3 className="text-sm text-gray-400 mb-2">{metric.label}</h3>
+              <p className="text-3xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+                <AnimatedCounter end={metric.value} />
+              </p>
+            </Card>
+          ))}
         </div>
 
         <Card className="p-8 bg-gradient-to-br from-[#1e1e2f] to-[#2a2a3e] border-[#3a3a4e] animate-fade-in animate-pulse-glow">

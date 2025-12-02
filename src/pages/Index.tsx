@@ -10,7 +10,7 @@ const metricsData = [
   { label: "WA piter", value: 1125052, icon: "MapPin", color: "#D946EF" },
   { label: "WA Volga", value: 1605237, icon: "Waves", color: "#0EA5E9" },
   { label: "Отдали WA в ТГ", value: 329268, icon: "Send", color: "#F97316" },
-  { label: "Dann", value: 10737, icon: "Zap", color: "#8B5CF6" },
+  { label: "WA Dann", value: 10737, icon: "Zap", color: "#F97316" },
   { label: "Сделано кликов", value: 263149, icon: "MousePointerClick", color: "#D946EF" },
   { label: "Ру клик", value: 162223, icon: "Flag", color: "#0EA5E9" },
   { label: "Ино клик", value: 100926, icon: "Globe", color: "#F97316" },
@@ -22,6 +22,7 @@ const metricsData = [
 const pieChartData = [
   { name: "WA piter", value: 1125052, fill: "#8B5CF6" },
   { name: "WA Volga", value: 1605237, fill: "#D946EF" },
+  { name: "WA Dann", value: 10737, fill: "#F97316" },
   { name: "Отдали в ТГ", value: 329268, fill: "#0EA5E9" },
 ];
 

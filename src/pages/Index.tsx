@@ -29,7 +29,6 @@ const pieChartData = [
   { name: "Retail", value: 1125052, fill: "#8B5CF6" },
   { name: "WEBCOM", value: 1605237, fill: "#D946EF" },
   { name: "WA Dann", value: 10377, fill: "#F97316" },
-  { name: "Отдали в ТГ", value: 329268, fill: "#0EA5E9" },
 ];
 
 const monthlyComparisonData = [

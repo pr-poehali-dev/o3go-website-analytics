@@ -67,8 +67,7 @@ const Index = () => {
     <div className="min-h-screen bg-gradient-to-br from-[#1a1a2e] via-[#16213e] to-[#0f3460] p-4 md:p-8">
       <div className="max-w-7xl mx-auto space-y-8">
         <header className="text-center space-y-4 animate-fade-in">
-          <h1 className="md:text-7xl font-bold bg-gradient-to-r from-[#8B5CF6] via-[#D946EF] to-[#0EA5E9] bg-clip-text text-transparent text-2xl">Департамент 
-галактического Whatsappa</h1>
+          <h1 className="md:text-7xl font-bold bg-gradient-to-r from-[#8B5CF6] via-[#D946EF] to-[#0EA5E9] bg-clip-text text-transparent text-4xl">Отчет о работе галактического департамента спама за ноябрь 2025</h1>
           <p className="text-xl text-gray-300"></p>
         </header>
 

@@ -449,10 +449,8 @@ const Index = () => {
         </div>
 
         <Card className="p-8 bg-gradient-to-br from-[#1e1e2f] to-[#2a2a3e] border-[#3a3a4e] animate-fade-in animate-pulse-glow">
-          <h2 className="text-3xl font-bold mb-6 text-white flex items-center gap-3">
-            <Icon name="TrendingUp" size={32} className="text-[#0EA5E9]" />
-            Статистика за период (22.08 - 29.11)
-          </h2>
+          <h2 className="text-3xl font-bold mb-6 text-white flex items-center gap-3">Статистика за период по внезапным Дэп-ам
+ (22.08 - 29.11)</h2>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <div className="space-y-3 p-6 rounded-xl bg-gradient-to-br from-[#8B5CF6]/10 to-[#D946EF]/10 border border-[#8B5CF6]/30">

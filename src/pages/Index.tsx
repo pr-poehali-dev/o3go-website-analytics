@@ -36,6 +36,11 @@ const monthlyComparisonData = [
   { name: "Ноябрь", value: 2730289, fill: "#D946EF" },
 ];
 
+const clicksComparisonData = [
+  { name: "Октябрь", value: 113437, fill: "#8B5CF6" },
+  { name: "Ноябрь", value: 263149, fill: "#D946EF" },
+];
+
 const clicksData = [
   { name: "Ру клик", value: 162223, fill: "#8B5CF6" },
   { name: "Ино клик", value: 100926, fill: "#D946EF" },
@@ -210,6 +215,48 @@ const Index = () => {
                   ))}
                 </Bar>
                 <Tooltip />
+              </BarChart>
+            </ResponsiveContainer>
+          </ChartContainer>
+        </Card>
+
+        <Card className="p-6 bg-gradient-to-br from-[#1e1e2f] to-[#2a2a3e] border-[#3a3a4e] animate-scale-in">
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-2xl font-bold text-white flex items-center gap-2">
+              <Icon name="MousePointerClick" size={28} className="text-[#F97316]" />
+              Сравнение по месяцам: Сделано кликов
+            </h2>
+            <div className="px-4 py-2 bg-gradient-to-r from-green-500/20 to-green-600/20 border border-green-500/50 rounded-lg">
+              <span className="text-green-400 font-bold text-lg">+132.0% 🚀</span>
+            </div>
+          </div>
+          <ChartContainer config={{}} className="h-[350px]">
+            <ResponsiveContainer width="100%" height={350}>
+              <BarChart data={clicksComparisonData} margin={{ top: 20, right: 30, left: 20, bottom: 20 }}>
+                <XAxis 
+                  dataKey="name" 
+                  stroke="#9ca3af"
+                  style={{ fontSize: '14px', fontWeight: 'bold' }}
+                />
+                <YAxis 
+                  stroke="#9ca3af"
+                  tickFormatter={(value) => (value / 1000).toFixed(0) + 'K'}
+                />
+                <Bar dataKey="value" radius={[8, 8, 0, 0]} label={{ 
+                  position: 'top', 
+                  fill: '#fff',
+                  formatter: (value: number) => value.toLocaleString('ru-RU'),
+                  style: { fontSize: '14px', fontWeight: 'bold' }
+                }}>
+                  {clicksComparisonData.map((entry, index) => (
+                    <Cell key={`cell-${index}`} fill={entry.fill} />
+                  ))}
+                </Bar>
+                <Tooltip 
+                  formatter={(value: number) => value.toLocaleString('ru-RU')}
+                  labelStyle={{ color: '#fff' }}
+                  contentStyle={{ backgroundColor: '#1e1e2f', border: '1px solid #3a3a4e' }}
+                />
               </BarChart>
             </ResponsiveContainer>
           </ChartContainer>

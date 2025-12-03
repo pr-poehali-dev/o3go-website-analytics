@@ -63,30 +63,6 @@ const AnimatedCounter = ({ end, duration = 2000 }: { end: number; duration?: num
 };
 
 const Index = () => {
-  const handleExportPDF = () => {
-    window.print();
-  };
-
-  const handleExportExcel = () => {
-    const allMetrics = [...waMetrics, ...clicksMetrics, ...otherMetrics];
-    const csvContent = [
-      ['Метрика', 'Значение'],
-      ...allMetrics.map(m => [m.label, m.value]),
-      ['', ''],
-      ['Период', '22.08 - 29.11'],
-      ['Депозиты', '1878'],
-      ['USDT', '13.146'],
-      ['Рубли', '1.051.680'],
-      ['ВАЗ (LADA) 2107', '6']
-    ].map(row => row.join(',')).join('\n');
-
-    const blob = new Blob(['\uFEFF' + csvContent], { type: 'text/csv;charset=utf-8;' });
-    const link = document.createElement('a');
-    link.href = URL.createObjectURL(blob);
-    link.download = 'o3goTeaM_stats.csv';
-    link.click();
-  };
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#1a1a2e] via-[#16213e] to-[#0f3460] p-4 md:p-8">
       <div className="max-w-7xl mx-auto space-y-8">
@@ -94,23 +70,6 @@ const Index = () => {
           <h1 className="md:text-7xl font-bold bg-gradient-to-r from-[#8B5CF6] via-[#D946EF] to-[#0EA5E9] bg-clip-text text-transparent text-2xl">Департамент 
 галактического Whatsappa</h1>
           <p className="text-xl text-gray-300"></p>
-          
-          <div className="flex gap-4 justify-center pt-4">
-            <Button 
-              onClick={handleExportPDF}
-              className="bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] hover:opacity-90 transition-all duration-300 hover:scale-105"
-            >
-              <Icon name="FileDown" className="mr-2" size={20} />
-              Экспорт PDF
-            </Button>
-            <Button 
-              onClick={handleExportExcel}
-              className="bg-gradient-to-r from-[#0EA5E9] to-[#F97316] hover:opacity-90 transition-all duration-300 hover:scale-105"
-            >
-              <Icon name="Table" className="mr-2" size={20} />
-              Экспорт Excel
-            </Button>
-          </div>
         </header>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">

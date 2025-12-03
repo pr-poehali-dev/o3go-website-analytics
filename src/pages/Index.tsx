@@ -202,19 +202,49 @@ const Index = () => {
         </div>
 
         <Card className="p-6 bg-gradient-to-br from-[#1e1e2f] to-[#2a2a3e] border-[#3a3a4e] animate-scale-in">
-          <h2 className="text-2xl font-bold mb-6 text-white flex items-center gap-2">
-            <Icon name="BarChart3" size={28} className="text-[#D946EF]" />
-            Клики по регионам
-          </h2>
-          <ChartContainer config={{}} className="h-[300px]">
-            <ResponsiveContainer width="100%" height={300}>
-              <BarChart data={clicksData}>
-                <Bar dataKey="value" radius={[8, 8, 0, 0]}>
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-2xl font-bold text-white flex items-center gap-2">
+              <Icon name="BarChart3" size={28} className="text-[#D946EF]" />
+              Клики по регионам
+            </h2>
+            <div className="flex gap-4">
+              <div className="text-sm">
+                <span className="text-gray-400">Ру клик: </span>
+                <span className="text-white font-bold">61.6%</span>
+              </div>
+              <div className="text-sm">
+                <span className="text-gray-400">Ино клик: </span>
+                <span className="text-white font-bold">38.4%</span>
+              </div>
+            </div>
+          </div>
+          <ChartContainer config={{}} className="h-[350px]">
+            <ResponsiveContainer width="100%" height={350}>
+              <BarChart data={clicksData} margin={{ top: 20, right: 30, left: 20, bottom: 20 }}>
+                <XAxis 
+                  dataKey="name" 
+                  stroke="#9ca3af"
+                  style={{ fontSize: '14px', fontWeight: 'bold' }}
+                />
+                <YAxis 
+                  stroke="#9ca3af"
+                  tickFormatter={(value) => (value / 1000).toFixed(0) + 'K'}
+                />
+                <Bar dataKey="value" radius={[8, 8, 0, 0]} label={{ 
+                  position: 'top', 
+                  fill: '#fff',
+                  formatter: (value: number) => value.toLocaleString('ru-RU'),
+                  style: { fontSize: '14px', fontWeight: 'bold' }
+                }}>
                   {clicksData.map((entry, index) => (
                     <Cell key={`cell-${index}`} fill={entry.fill} />
                   ))}
                 </Bar>
-                <Tooltip />
+                <Tooltip 
+                  formatter={(value: number) => value.toLocaleString('ru-RU')}
+                  labelStyle={{ color: '#fff' }}
+                  contentStyle={{ backgroundColor: '#1e1e2f', border: '1px solid #3a3a4e' }}
+                />
               </BarChart>
             </ResponsiveContainer>
           </ChartContainer>

@@ -7,8 +7,8 @@ import { Bar, BarChart, Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from
 
 const waMetrics = [
   { label: "Отправлено WA", value: 2730289, icon: "MessageCircle", color: "#8B5CF6" },
-  { label: "WA piter", value: 1125052, icon: "MapPin", color: "#D946EF" },
-  { label: "WA Volga", value: 1605237, icon: "Waves", color: "#0EA5E9" },
+  { label: "Retail", value: 1125052, icon: "MapPin", color: "#D946EF" },
+  { label: "WEBCOM", value: 1605237, icon: "Waves", color: "#0EA5E9" },
   { label: "WA Dann", value: 10377, icon: "Zap", color: "#F97316" },
   { label: "Отдали WA в ТГ", value: 329268, icon: "Send", color: "#0EA5E9" },
 ];
@@ -26,8 +26,8 @@ const otherMetrics = [
 ];
 
 const pieChartData = [
-  { name: "WA piter", value: 1125052, fill: "#8B5CF6" },
-  { name: "WA Volga", value: 1605237, fill: "#D946EF" },
+  { name: "Retail", value: 1125052, fill: "#8B5CF6" },
+  { name: "WEBCOM", value: 1605237, fill: "#D946EF" },
   { name: "WA Dann", value: 10377, fill: "#F97316" },
   { name: "Отдали в ТГ", value: 329268, fill: "#0EA5E9" },
 ];

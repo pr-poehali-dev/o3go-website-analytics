@@ -71,10 +71,44 @@ const AnimatedCounter = ({ end, duration = 2000 }: { end: number; duration?: num
   return <span>{count.toLocaleString('ru-RU')}</span>;
 };
 
+const BackgroundIcons = () => {
+  const icons = [
+    { name: "MessageCircle", top: "10%", left: "5%", size: 60, delay: 0 },
+    { name: "Phone", top: "20%", right: "8%", size: 50, delay: 1 },
+    { name: "MessageSquare", top: "35%", left: "3%", size: 55, delay: 2 },
+    { name: "MousePointerClick", top: "50%", right: "5%", size: 45, delay: 3 },
+    { name: "Send", top: "65%", left: "7%", size: 50, delay: 4 },
+    { name: "Zap", top: "75%", right: "10%", size: 55, delay: 5 },
+    { name: "Globe", top: "15%", left: "50%", size: 40, delay: 6 },
+    { name: "Flag", top: "80%", left: "45%", size: 45, delay: 7 },
+  ];
+
+  return (
+    <div className="fixed inset-0 pointer-events-none overflow-hidden">
+      {icons.map((icon, index) => (
+        <div
+          key={index}
+          className="absolute animate-float opacity-5"
+          style={{
+            top: icon.top,
+            left: icon.left,
+            right: icon.right,
+            animationDelay: `${icon.delay}s`,
+            animationDuration: `${15 + index * 2}s`,
+          }}
+        >
+          <Icon name={icon.name} size={icon.size} className="text-white" />
+        </div>
+      ))}
+    </div>
+  );
+};
+
 const Index = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#1a1a2e] via-[#16213e] to-[#0f3460] p-4 md:p-8">
-      <div className="max-w-7xl mx-auto space-y-8">
+    <div className="min-h-screen bg-gradient-to-br from-[#1a1a2e] via-[#16213e] to-[#0f3460] p-4 md:p-8 relative">
+      <BackgroundIcons />
+      <div className="max-w-7xl mx-auto space-y-8 relative z-10">
         <header className="text-center space-y-4 animate-fade-in">
           <h1 className="md:text-7xl font-bold bg-gradient-to-r from-[#8B5CF6] via-[#D946EF] to-[#0EA5E9] bg-clip-text text-transparent text-4xl">Отчет о работе галактического департамента спама за ноябрь 2025</h1>
           <p className="text-xl text-gray-300"></p>

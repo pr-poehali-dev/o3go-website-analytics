@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import Icon from "@/components/ui/icon";
 import { useState, useEffect } from "react";
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
-import { Bar, BarChart, Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
+import { Bar, BarChart, Cell, Pie, PieChart, ResponsiveContainer, Tooltip, XAxis, YAxis, Label } from "recharts";
 
 const waMetrics = [
   { label: "Отправлено WA", value: 2730289, icon: "MessageCircle", color: "#8B5CF6" },
@@ -130,14 +130,33 @@ const Index = () => {
         </Card>
 
         <Card className="p-6 bg-gradient-to-br from-[#1e1e2f] to-[#2a2a3e] border-[#3a3a4e] animate-scale-in">
-          <h2 className="text-2xl font-bold mb-6 text-white flex items-center gap-2">
-            <Icon name="TrendingUp" size={28} className="text-[#0EA5E9]" />
-            Сравнение по месяцам: Отправлено WA
-          </h2>
-          <ChartContainer config={{}} className="h-[300px]">
-            <ResponsiveContainer width="100%" height={300}>
-              <BarChart data={monthlyComparisonData}>
-                <Bar dataKey="value" radius={[8, 8, 0, 0]}>
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-2xl font-bold text-white flex items-center gap-2">
+              <Icon name="TrendingUp" size={28} className="text-[#0EA5E9]" />
+              Сравнение по месяцам: Отправлено WA
+            </h2>
+            <div className="px-4 py-2 bg-gradient-to-r from-green-500/20 to-green-600/20 border border-green-500/50 rounded-lg">
+              <span className="text-green-400 font-bold text-lg">+26.9% 📈</span>
+            </div>
+          </div>
+          <ChartContainer config={{}} className="h-[350px]">
+            <ResponsiveContainer width="100%" height={350}>
+              <BarChart data={monthlyComparisonData} margin={{ top: 20, right: 30, left: 20, bottom: 20 }}>
+                <XAxis 
+                  dataKey="name" 
+                  stroke="#9ca3af"
+                  style={{ fontSize: '14px', fontWeight: 'bold' }}
+                />
+                <YAxis 
+                  stroke="#9ca3af"
+                  tickFormatter={(value) => (value / 1000000).toFixed(1) + 'M'}
+                />
+                <Bar dataKey="value" radius={[8, 8, 0, 0]} label={{ 
+                  position: 'top', 
+                  fill: '#fff',
+                  formatter: (value: number) => value.toLocaleString('ru-RU'),
+                  style: { fontSize: '14px', fontWeight: 'bold' }
+                }}>
                   {monthlyComparisonData.map((entry, index) => (
                     <Cell key={`cell-${index}`} fill={entry.fill} />
                   ))}

@@ -32,6 +32,11 @@ const pieChartData = [
   { name: "Отдали в ТГ", value: 329268, fill: "#0EA5E9" },
 ];
 
+const monthlyComparisonData = [
+  { name: "Октябрь", value: 2151700, fill: "#8B5CF6" },
+  { name: "Ноябрь", value: 2730289, fill: "#D946EF" },
+];
+
 const clicksData = [
   { name: "Ру клик", value: 162223, fill: "#8B5CF6" },
   { name: "Ино клик", value: 100926, fill: "#D946EF" },
@@ -120,6 +125,29 @@ const Index = () => {
                 </Pie>
                 <Tooltip />
               </PieChart>
+            </ResponsiveContainer>
+          </ChartContainer>
+        </Card>
+
+        <Card className="p-6 bg-gradient-to-br from-[#1e1e2f] to-[#2a2a3e] border-[#3a3a4e] animate-scale-in">
+          <h2 className="text-2xl font-bold mb-6 text-white flex items-center gap-2">
+            <Icon name="TrendingUp" size={28} className="text-[#0EA5E9]" />
+            Сравнение по месяцам: Отправлено WA
+          </h2>
+          <ChartContainer config={{}} className="h-[300px]">
+            <ResponsiveContainer width="100%" height={300}>
+              <BarChart data={monthlyComparisonData}>
+                <Bar dataKey="value" radius={[8, 8, 0, 0]}>
+                  {monthlyComparisonData.map((entry, index) => (
+                    <Cell key={`cell-${index}`} fill={entry.fill} />
+                  ))}
+                </Bar>
+                <Tooltip 
+                  formatter={(value: number) => value.toLocaleString('ru-RU')}
+                  labelStyle={{ color: '#fff' }}
+                  contentStyle={{ backgroundColor: '#1e1e2f', border: '1px solid #3a3a4e' }}
+                />
+              </BarChart>
             </ResponsiveContainer>
           </ChartContainer>
         </Card>
